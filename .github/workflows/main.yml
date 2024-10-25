@@ -1,0 +1,30 @@
+# .github/workflows/main.yml
+name: CI Pipeline  # Название вашего workflow
+
+on:
+  push:
+    branches:
+      - main
+      - development
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Виртуальная среда для выполнения CI/CD
+
+    steps:
+      - name: Checkout code  # Клонирование кода
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js  # Установка Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'  # Замените на требуемую версию Node.js
+
+      - name: Install dependencies  # Установка зависимостей
+        run: npm install
+
+      - name: Run tests  # Запуск тестов
+        run: npm test
